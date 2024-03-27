@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\MalpracticesController;
 use App\Http\Controllers\frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\HeadlineController;
+use App\Http\Controllers\Admin\DgMessageController;
 
 
 /*
@@ -27,12 +28,18 @@ use App\Http\Controllers\Admin\HeadlineController;
 */
 use Illuminate\Support\Facades\Hash;
 
-
-Route::get('/', [FrontendHomeController::class, 'index'])->name('index');
+Route::group(['middleware'=>['guest']], function () {
+Route::get('/', [FrontendHomeController::class, 'index'])->name('front.index');
+});
 Route::get('/press_release', [FrontendHomeController::class, 'press_release'])->name('pressRelease');
 Route::get('/fir', [FrontendHomeController::class, 'fir'])->name('fir');
 Route::get('/legal', [FrontendHomeController::class, 'legal'])->name('legal');
 Route::get('/statistics', [FrontendHomeController::class, 'statistics'])->name('statistics');
+
+Route::get('/events', function () {
+    return view('frontend.events');
+})->name('events');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -105,8 +112,17 @@ Route::group(['middleware'=>['auth']], function () {
     Route::post('update_mp', [MalpracticesController::class, 'update_mp'])->name('update_mp');
     Route::delete('destroy_mp/{id}', [MalpracticesController::class, 'destroy_mp'])->name('mp.destroy');
     
+    //Home Slider
     Route::resource('sliders', SliderController::class);
+
+    //Home Head Lines
     Route::resource('headlines', HeadlineController::class);
+
+    //DG Messages
+    Route::get('dgmessages', [DgMessageController::class, 'edit'])->name('dgmessages');
+    Route::put('dgmessages/update', [DgMessageController::class, 'update'])->name('dgmessages.update');
+
+
 
 
 });

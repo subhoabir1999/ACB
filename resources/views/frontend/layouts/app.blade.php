@@ -161,29 +161,29 @@
                         <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                    <a class="nav-link {{ areActiveRoutes(['front.index'])}}" aria-current="page" href="{{ route('front.index') }}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('pressRelease') }}">Press Release</a>
+                                    <a class="nav-link {{ areActiveRoutes(['pressRelease'])}}" href="{{ route('pressRelease') }}">Press Release</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="events.html">Events</a>
+                                    <a class="nav-link" href="events">Events</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('statistics') }}">Statistics</a>
+                                    <a class="nav-link {{ areActiveRoutes(['statistics'])}}" href="{{ route('statistics') }}">Statistics</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">About Us</a>
+                                    <a class="nav-link {{ areActiveRoutes(['front.index'])}}" href="#">About Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('fir') }}">FIRs</a>
+                                    <a class="nav-link {{ areActiveRoutes(['fir'])}}" href="{{ route('fir') }}">FIRs</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('legal') }}">Legal</a>
+                                    <a class="nav-link {{ areActiveRoutes(['legal'])}}" href="{{ route('legal') }}">Legal</a>
                                 </li>
                             </ul>
                         </div>
-                        <a href="bribe-demand-complaint.html" class="default-btn me-2">Online Complaint</a>
+                        <a href="bribe-demand-complaint" class="default-btn me-2">Online Complaint</a>
                         <img class="nav-embalem" src="/frontend/images/satya_mav_embalem.svg" class="ms-4" alt="" srcset="">
                     </div>
                 </div>

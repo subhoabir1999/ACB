@@ -32,18 +32,18 @@
     </div>
     <marquee behavior="scroll" direction="left" class="headline-marquee">
         @foreach ($headline as $headline_dt)
-        @if($headline_dt->file)
-        <a class="text-white" href="{{ asset('storage/'.$headline_dt->file) }}" target="_blank">{{ getLocalizedColumn($headline_dt, 'title') }}</a>
-        @elseif($headline_dt->link)
-        <a class="text-white" href="{{ $headline_dt->link }}" target="_blank">{{ getLocalizedColumn($headline_dt, 'title') }}</a>
-        @else
-        <p>{{ getLocalizedColumn($headline_dt, 'title') }}</p>
-        @endif
-            
+            <div style="display: inline-block;">
+                @if($headline_dt->file)
+                    <a class="text-white" href="{{ asset('storage/'.$headline_dt->file) }}" target="_blank">{{ getLocalizedColumn($headline_dt, 'title') }}</a>
+                @elseif($headline_dt->link)
+                    <a class="text-white" href="{{ $headline_dt->link }}" target="_blank">{{ getLocalizedColumn($headline_dt, 'title') }}</a>
+                @else
+                    <p>{{ getLocalizedColumn($headline_dt, 'title') }}</p>
+                @endif
+            </div>
         @endforeach
-        {{-- <p>आलोसे-विस्तार अधिकारी(पं), पंचायत समिती साकोली, ता. साकोली, जि. भंडारा यांनी तक्रारदार यांनी
-            आलोसे-विस्तार अधिकारी(पं), पंचायत समिती साकोली, ता. साकोली, जि. भंडारा यांनी तक्रारदार यांनी</p> --}}
     </marquee>
+    
 </div>
 <!-- Headline Marquee Ends -->
 </div>
@@ -167,23 +167,10 @@
         <img class="message-quote" src="{{ asset('frontend/images/quote.svg') }}" alt="">
         <div class="message">
             <h5 class="message-title fw-bold">DG′s Message</h5>
-            <p class="message-content">The Anti Corruption Bureau (ACB) is an important wing of the Government of
-                Maharashtra. Anti
-                Corruption Bureau's mission is in consonance with the Maharashtra State Government's policy of
-                corruption-free and transparent governance.</p>
-            <p class="message-content">The Government provides several services to the citizens. If the Government
-                functionaries demand
-                bribe for any government duty, the citizens should approach ACB. The ACB shall always firmly
-                stand by such citizens and bring the perpetrators to book. A corruption free society will usher
-                in an era of progress, prosperity and good governance. This would be possible only with the
-                active participation and co-operation of the citizens.</p>
-            <p class="message-content">Help ACB to free the society from the clutches of corruption and give impetus
-                to development.
-                Maharashtra ACB is here to help you at every step.</p>
-            <p class="message-content">Jai Hind ! Jai Maharashtra !</p>
+            <p class="message-content m-0">{!! getLocalizedColumn($Dgmessage, 'about') !!}</p>
 
-            <p class="message-content fw-bold m-0">Shri. Jai Jeet Singh (IPS),</p>
-            <p class="message-content">Director General - Anti-Corruption Bureau, Maharashtra State</p>
+            <p class="message-content fw-bold m-0">{!! getLocalizedColumn($Dgmessage, 'name') !!}</p>
+            <p class="message-content">{!! getLocalizedColumn($Dgmessage, 'post') !!}</p>
         </div>
     </div>
 </div>

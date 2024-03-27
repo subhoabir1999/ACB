@@ -12,6 +12,7 @@ use App\Models\Statistic;
 use App\Models\Slider;
 use App\Models\Range;
 use App\Models\Unit;
+use App\Models\Dgmessage;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,8 @@ class HomeController extends Controller
         $legal=Legal::orderBy('id','DESC')->get();
         $statistic=Statistic::orderBy('id','DESC')->get();
         $slider=Slider::orderBy('priority','ASC')->get();
-        return view('frontend.index',compact('headline','pressRelease','fir','legal','statistic','slider'));
+        $Dgmessage=Dgmessage::first();
+        return view('frontend.index',compact('headline','pressRelease','fir','legal','statistic','slider','Dgmessage'));
     }
     public function press_release(Request $request){
         $ranges=Range::all();
@@ -78,22 +80,15 @@ class HomeController extends Controller
         return view('frontend.legal',compact('legalres','ranges','selectedRange','selectedUnit','selectedDate'));
     }
     public function statistics(Request $request){
-        $ranges=Range::all();
         $perPage = $request->input('perPage', 10); // Change this value to the desired number of items per page
-        $selectedRange = $request->input('range');
-        $selectedUnit = $request->input('unit');
         $selectedDate = $request->input('datefilter');
-        $firres=Fir::orderBy('id','DESC');
-        if($selectedRange){
-            $firres=$firres->where('range',$selectedRange);
-        }
-        if($selectedUnit){
-            $firres=$firres->where('unit',$selectedUnit);
-        }
+        $statres=Statistic::orderBy('id','DESC');
+       
         if($selectedDate){
-            $firres=$firres->where('date',date("Y-m-d", strtotime($selectedDate)));
+            $statres=$statres->where('year',$selectedDate);
         }
-        $firres=$firres->paginate($perPage);
-        return view('frontend.fir',compact('firres','ranges','selectedRange','selectedUnit','selectedDate'));
+        $dates=Statistic::select('year')->groupBy('year')->get();
+        $statres=$statres->paginate($perPage);
+        return view('frontend.statistics',compact('statres','dates','selectedDate'));
     }
 }

@@ -182,8 +182,8 @@
               </p>
             </a>
           </li> --}}
-          <li class="nav-item {{ areActiveRoutesMenu(['user_list', 'add_user','range_list','unit_list','add_user','add_range','add_unit'])}}">
-            <a href="javascript:" class="nav-link {{ areActiveRoutes(['user_list', 'add_user','range_list','unit_list','add_user','add_range','add_unit'])}}">
+          <li class="nav-item {{ areActiveRoutesMenu(['sliders.*', 'headlines.*','dgmessages'])}}">
+            <a href="javascript:" class="nav-link {{ areActiveRoutes(['/^sliders\..*/', '/^headlines\..*/', 'dgmessages']) }}">
               <i class="fa fa-home nav-icon" aria-hidden="true"></i>
               <p>
                 Home Setting
@@ -205,7 +205,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('unit_list') }}" class="nav-link {{ areActiveRoutes(['unit_list','add_unit'])}}">
+                <a href="{{ route('dgmessages') }}" class="nav-link {{ areActiveRoutes(['dgmessages'])}}">
                   <i class="fas fa-user-shield nav-icon"></i>
                   <p>DG's Message</p>
                 </a>

@@ -67,7 +67,7 @@
             <tr>
                 <td scope="row"><span><img class="me-2" src="{{ asset('frontend/images/doc-icon.svg') }}" alt="" srcset="">{{ getLocalizedColumn($firres_dt, 'title') }}</span></td>
                 <td style="color: var(--neutral-color-90);" class="table-text-center">{{ date('d/m/Y', strtotime($firres_dt->date)) }}</td>
-                <td class="table-text-center"><button class="secondary-btn-border" href='{{ asset("storage/.$firres_dt->file") }}'>View</button></td>
+                <td class="table-text-center"><a class="secondary-btn-border p-1" href='{{ asset("storage/$firres_dt->file") }}'>View</a></td>
             </tr>
             @endforeach
             @if(count($firres)==0)

@@ -5,14 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Headline;
+use Illuminate\Support\Facades\Storage;
 
 class HeadlineController extends Controller
 {
     // Display a listing of the resource.
     public function index()
     {
-        $headlines = Headline::all();
-        return view('headlines.index', compact('headlines'));
+        $headline = Headline::all();
+        return view('headlines.index', compact('headline'));
     }
 
     // Show the form for creating a new resource.
@@ -27,23 +28,27 @@ class HeadlineController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'title_mr' => 'required',
-            'title_hi' => 'required',
-            'priority' => 'required|integer',
+            'priority' => 'nullable|integer',
             'link' => 'nullable|url',
-            'file' => 'nullable|file',
-            'user_id' => 'required|exists:users,id',
+            'file' => 'nullable|file|mimes:jpeg,png,gif,pdf,doc,docx|max:2048',
         ]);
 
-        // Handle file upload
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = $file->getClientOriginalName();
-            $filePath = $file->store('uploads', 'public');
-            $validatedData['file'] = $filePath;
+    $headline = new Headline();
+    $headline->title = $request->title;
+    $headline->title_mr = $request->title_mr;
+    $headline->title_hi = $request->title_hi;
+    $headline->link = $request->link;
+    if ($request->hasFile('file')) {
+        $folder = 'headlines';
+        if (!Storage::disk('public')->exists($folder)) {
+            Storage::disk('public')->makeDirectory($folder);
         }
+    $headline->file = $request->file('file')->store('headlines', 'public');
+    }
+    // If priority is not provided, find the highest priority and increment by 1
+    $headline->priority = $request->has('priority') ? $request->priority : (Headline::max('priority') + 1);
 
-        Headline::create($validatedData);
-
+    $headline->save();
         return redirect()->route('headlines.index')
             ->with('success', 'Headline created successfully.');
     }
@@ -66,23 +71,29 @@ class HeadlineController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'title_mr' => 'required',
-            'title_hi' => 'required',
-            'priority' => 'required|integer',
+            'priority' => 'nullable|integer',
             'link' => 'nullable|url',
-            'file' => 'nullable|file',
-            'user_id' => 'required|exists:users,id',
+            'file' => 'nullable|file|mimes:jpeg,png,gif,pdf,doc,docx|max:2048',
         ]);
 
-        // Handle file upload
+        $headline->title = $request->title;
+        $headline->title_mr = $request->title_mr;
+        $headline->title_hi = $request->title_hi;
+        $headline->link = $request->link;
+
+        // Remove old file if new file is provided
         if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = $file->getClientOriginalName();
-            $filePath = $file->store('uploads', 'public');
-            $validatedData['file'] = $filePath;
+            // Delete old file
+            Storage::disk('public')->delete($headline->file);
+
+            // Store new file
+            $headline->file = $request->file('file')->store('headlines', 'public');
         }
 
-        $headline->update($validatedData);
+        // If priority is not provided, find the highest priority and increment by 1
+        $headline->priority = $request->has('priority') ? $request->priority : (Headline::max('priority') + 1);
 
+        $headline->save();
         return redirect()->route('headlines.index')
             ->with('success', 'Headline updated successfully.');
     }

@@ -8,13 +8,12 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Headlines</h3>
+                            <h3 class="card-title">Create Headline</h3>
                             <a href="{{ route('headlines.index') }}" class="btn btn-warning btn-block btn-flat btn-sm" style="float: right;width:150px;color: black;"><i class="fa fa-users"></i> Slider List</a>
                         </div>
                         <!-- /.card-header -->
-                        <form method="POST" action="{{ route('sliders.update', $slider->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('headlines.store') }}" enctype="multipart/form-data" id="add_slider">
                             @csrf
-                            @method('PUT')
                             <div class="card-body">
                                 @if(session('message'))
                                     <div class="alert alert-success alert-dismissible">
@@ -26,7 +25,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title" class="required">Title</label>
-                                            <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $slider->title) }}" required autofocus>
+                                            <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" required autofocus>
                                             @error('title')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -37,7 +36,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title_mr" class="required">Title In Marathi</label>
-                                            <input type="text" id="title_mr" name="title_mr" class="form-control @error('title_mr') is-invalid @enderror" value="{{ old('title_mr', $slider->title_mr) }}" required>
+                                            <input type="text" id="title_mr" name="title_mr" class="form-control @error('title_mr') is-invalid @enderror" value="{{ old('title_mr') }}" required>
                                             @error('title_mr')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -48,7 +47,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title_hi">Title In Hindi</label>
-                                            <input type="text" id="title_hi" name="title_hi" class="form-control @error('title_hi') is-invalid @enderror" value="{{ old('title_hi', $slider->title_hi) }}">
+                                            <input type="text" id="title_hi" name="title_hi" class="form-control @error('title_hi') is-invalid @enderror" value="{{ old('title_hi') }}">
                                             @error('title_hi')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -58,22 +57,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="photo" class="required">Photo</label>
-                                            <input type="file" id="photo" name="photo" class="form-control @error('photo') is-invalid @enderror">
-                                            @error('photo')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            @if($slider->photo)
-                                                <img src="{{ asset('gallery/' . $slider->photo) }}" alt="Slider Photo" style="width: 100px; height: auto;">
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="priority" class="required">Priority</label>
-                                            <input type="number" id="priority" name="priority" class="form-control @error('priority') is-invalid @enderror" value="{{ old('priority', $slider->priority) }}" required>
+                                            <label for="priority" >Priority</label>
+                                            <input type="number" id="priority" name="priority" class="form-control @error('priority') is-invalid @enderror" value="{{ old('priority') }}" >
                                             @error('priority')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -83,9 +68,20 @@
                                     </div>
                                     <div class="col-md-4">
                                       <div class="form-group">
-                                          <label for="link" class="required">Slider Link</label>
-                                          <input type="text" id="link" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ old('link',$slider->link) }}" required>
+                                          <label for="link" >Headline Link</label>
+                                          <input type="text" id="link" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ old('link') }}" >
                                           @error('link')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="file" >File</label>
+                                          <input type="file" id="file" name="file" class="form-control @error('file') is-invalid @enderror" >
+                                          @error('file')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>
@@ -129,13 +125,11 @@
           title_mr: {
             required: true
           },
-          photo: {
-            required: true,
-            extension: "jpg|png|jpeg|svg|webp"
-          },
           priority: {
-            required: true,
             number: true
+          },
+          file: {
+            extension: "pdf|doc|jpg|png|jpeg|svg|webp"
           }
         },
         messages: {
@@ -145,13 +139,11 @@
           title_mr: {
             required: "Please enter a title in Marathi"
           },
-          photo: {
-            required: "Please select a photo",
-            extension: "Please select a valid image file (jpg, png, jpeg, svg, or webp)"
-          },
           priority: {
-            required: "Please enter a priority",
             number: "Please enter a valid priority"
+          },
+          file: {
+            extension: "Please select a valid image file (jpg, png, jpeg, svg, or webp)"
           }
         },
         errorElement: 'span',
@@ -168,4 +160,5 @@
       });
     });
 </script>
+
 @endsection

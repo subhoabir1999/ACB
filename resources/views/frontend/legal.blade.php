@@ -67,7 +67,7 @@
             @foreach ($legalres as $legalres_dt)
             <tr>
                 <td scope="row"><span><img class="me-2" src="{{ asset('frontend/images/doc-icon.svg') }}" alt="" srcset="">{{ getLocalizedColumn($legalres_dt, 'title') }}</span></td>
-                <td class="table-text-center"><button class="secondary-btn-border" href='{{ asset("storage/.$legalres_dt->file") }}'>View</button></td>
+                <td class="table-text-center"><a class="secondary-btn-border p-1" href='{{ asset("storage/$legalres_dt->file") }}'>View</a></td>
             </tr>
             @endforeach
             @if(count($legalres)==0)

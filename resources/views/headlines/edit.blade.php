@@ -8,12 +8,13 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Create Headline</h3>
+                            <h3 class="card-title">Edit Headline</h3>
                             <a href="{{ route('headlines.index') }}" class="btn btn-warning btn-block btn-flat btn-sm" style="float: right;width:150px;color: black;"><i class="fa fa-users"></i> Slider List</a>
                         </div>
                         <!-- /.card-header -->
-                        <form method="POST" action="{{ route('headlines.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('headlines.update', $headline->id) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 @if(session('message'))
                                     <div class="alert alert-success alert-dismissible">
@@ -25,7 +26,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title" class="required">Title</label>
-                                            <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" required autofocus>
+                                            <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ $headline->title }}" required autofocus>
                                             @error('title')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -36,7 +37,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title_mr" class="required">Title In Marathi</label>
-                                            <input type="text" id="title_mr" name="title_mr" class="form-control @error('title_mr') is-invalid @enderror" value="{{ old('title_mr') }}" required>
+                                            <input type="text" id="title_mr" name="title_mr" class="form-control @error('title_mr') is-invalid @enderror" value="{{ $headline->title_mr }}" required>
                                             @error('title_mr')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -47,7 +48,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="title_hi">Title In Hindi</label>
-                                            <input type="text" id="title_hi" name="title_hi" class="form-control @error('title_hi') is-invalid @enderror" value="{{ old('title_hi') }}">
+                                            <input type="text" id="title_hi" name="title_hi" class="form-control @error('title_hi') is-invalid @enderror" value="{{ $headline->title_hi }}">
                                             @error('title_hi')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -57,19 +58,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="photo" class="required">Photo</label>
-                                            <input type="file" id="photo" name="photo" class="form-control @error('photo') is-invalid @enderror" required>
-                                            @error('photo')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="priority" class="required">Priority</label>
-                                            <input type="number" id="priority" name="priority" class="form-control @error('priority') is-invalid @enderror" value="{{ old('priority') }}" required>
+                                            <label for="priority" >Priority</label>
+                                            <input type="number" id="priority" name="priority" class="form-control @error('priority') is-invalid @enderror" value="{{ $headline->priority }}" >
                                             @error('priority')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -79,8 +69,8 @@
                                     </div>
                                     <div class="col-md-4">
                                       <div class="form-group">
-                                          <label for="link" class="required">Slider Link</label>
-                                          <input type="text" id="link" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ old('link') }}" required>
+                                          <label for="link" >Headline Link</label>
+                                          <input type="text" id="link" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ $headline->link }}" >
                                           @error('link')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -88,12 +78,28 @@
                                           @enderror
                                       </div>
                                   </div>
+                                  <!-- Other fields -->
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="file">File</label>
+                                        
+                                        <input type="file" id="file" name="file" class="form-control @error('file') is-invalid @enderror">
+                                        @error('file')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        @if($headline->file)
+                                            <p><a href="{{ asset('storage/' . $headline->file) }}" target="_blank">{{ $headline->file }}</a></p>
+                                        @endif
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                     </div>
@@ -108,6 +114,7 @@
 </div>
 <!-- /.content-wrapper -->
 @endsection
+
 @section('script')
 <script>
     $(function () {
@@ -124,13 +131,11 @@
           title_mr: {
             required: true
           },
-          photo: {
-            required: true,
-            extension: "jpg|png|jpeg|svg|webp"
-          },
           priority: {
-            required: true,
             number: true
+          },
+          file: {
+            extension: "pdf|doc|jpg|png|jpeg|svg|webp"
           }
         },
         messages: {
@@ -140,13 +145,11 @@
           title_mr: {
             required: "Please enter a title in Marathi"
           },
-          photo: {
-            required: "Please select a photo",
-            extension: "Please select a valid image file (jpg, png, jpeg, svg, or webp)"
-          },
           priority: {
-            required: "Please enter a priority",
             number: "Please enter a valid priority"
+          },
+          file: {
+            extension: "Please select a valid file (pdf, doc, jpg, png, jpeg, svg, or webp)"
           }
         },
         errorElement: 'span',

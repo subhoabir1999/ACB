@@ -30,7 +30,8 @@
                           <th>Title</th>
                           <th>Title In Marathi</th>
                           <th>Title In Hindi</th>
-                          <th>photo</th>
+                          <th>Link</th>
+                          <th>File</th>
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -40,18 +41,19 @@
                                 <td>{{ $headlines->title }}</td>
                                 <td>{{ $headlines->title_mr }}</td>
                                 <td>{{ $headlines->title_hi }}</td>
+                                <td>{{ $headlines->link }}</td>
                                 <td>
                                     @if($headlines->file)
                                     <img src="{{ asset('storage/'.$headlines->file) }}" alt="Gallery Photo" style="width: 100px; height: auto;">
                                     @else
-                                    No Photo
+                                    No File
                                     @endif
                                 </td>
                                 <td>  
                                   <div class="btn-group">
-                                      <button type="button" onclick="location.href='{{ route('sliders.edit', $gallery->id) }}';" class="btn btn-success btn-block btn-sm"><i class="fa fa-edit"></i></button>                           
+                                      <button type="button" onclick="location.href='{{ route('headlines.edit', $headlines->id) }}';" class="btn btn-success btn-block btn-sm"><i class="fa fa-edit"></i></button>                           
                                       <form type="submit" method="POST" style="display: inline"
-                                          action="{{ route('sliders.destroy', $gallery->id) }}"
+                                          action="{{ route('headlines.destroy', $headlines->id) }}"
                                           onsubmit="return confirmDelete(event)">
                                           @csrf
                                           @method('DELETE')
