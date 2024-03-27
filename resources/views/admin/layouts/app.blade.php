@@ -50,6 +50,10 @@
     content: " *";
     color: red;
 }
+
+.btn-group button{
+  border-radius: 0px;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -178,9 +182,40 @@
               </p>
             </a>
           </li> --}}
-          @if(Auth::user()->role_id==1 || Auth::user()->role_id==2 )
           <li class="nav-item {{ areActiveRoutesMenu(['user_list', 'add_user','range_list','unit_list','add_user','add_range','add_unit'])}}">
             <a href="javascript:" class="nav-link {{ areActiveRoutes(['user_list', 'add_user','range_list','unit_list','add_user','add_range','add_unit'])}}">
+              <i class="fa fa-home nav-icon" aria-hidden="true"></i>
+              <p>
+                Home Setting
+                <i class="fas fa-angle-left right"></i>
+                {{-- <span class="badge badge-info right">6</span> --}}
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('sliders.index') }}" class="nav-link {{ areActiveRoutes(['sliders.*'])}}">
+                  <i class="fas fa-images nav-icon"></i>
+                  <p>Home Slider</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('headlines.index') }}" class="nav-link {{ areActiveRoutes(['headlines.*'])}}">
+                  <i class="fas fa-heading nav-icon"></i>
+                  <p>Head Lines</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('unit_list') }}" class="nav-link {{ areActiveRoutes(['unit_list','add_unit'])}}">
+                  <i class="fas fa-user-shield nav-icon"></i>
+                  <p>DG's Message</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          @if(Auth::user()->role_id==1 || Auth::user()->role_id==2 )
+          <li class="nav-item {{ areActiveRoutesMenu(['user_list', 'add_user'])}}">
+            <a href="javascript:" class="nav-link {{ areActiveRoutes(['user_list', 'add_user'])}}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
@@ -190,21 +225,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('user_list') }}" class="nav-link {{ areActiveRoutes(['user_list','add_user'])}}">
+                <a href="{{ route('user_list') }}" class="nav-link {{ areActiveRoutes(['user_list'])}}">
                   <i class="far fa-user nav-icon"></i>
                   <p>User List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('range_list') }}" class="nav-link {{ areActiveRoutes(['range_list','add_range'])}}">
-                    <i class="fas fa-address-card nav-icon"></i>
-                  <p>Range List</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('unit_list') }}" class="nav-link {{ areActiveRoutes(['unit_list','add_unit'])}}">
-                    <i class="fas fa-address-card nav-icon"></i>
-                  <p>Unit List</p>
+                <a href="{{ route('user_list') }}" class="nav-link {{ areActiveRoutes(['add_user'])}}">
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>Add User</p>
                 </a>
               </li>
               
@@ -212,20 +241,32 @@
           </li>
           @endif
           <li class="nav-item">
+            <a href="{{ route('range_list') }}" class="nav-link {{ areActiveRoutes(['range_list','add_range'])}}">
+                <i class="fas fa-address-card nav-icon"></i>
+              <p>Range List</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('unit_list') }}" class="nav-link {{ areActiveRoutes(['unit_list','add_unit'])}}">
+                <i class="fas fa-address-card nav-icon"></i>
+              <p>Unit List</p>
+            </a>
+          </li>
+          <li class="nav-item">
           <a href="{{ route('pr_list') }}" class="nav-link">
-            <i class="nav-icon fas fa-list"></i>
+            <i class="fas fa-newspaper nav-icon"></i>
             <p>
               Press Release
-              <span class="right badge badge-danger">New</span>
+              {{-- <span class="right badge badge-danger">New</span> --}}
             </p>
           </a>
         </li> 
         <li class="nav-item">
         <a href="{{ route('fir_list') }}" class="nav-link">
-          <i class="nav-icon fas fa-list"></i>
+          <i class="fa fa-bullhorn nav-icon" aria-hidden="true"></i>
           <p>
             FIR
-            <span class="right badge badge-danger">New</span>
+            {{-- <span class="right badge badge-danger">New</span> --}}
           </p>
         </a>
       </li> 
@@ -234,29 +275,28 @@
         <i class="nav-icon fas fa-list"></i>
         <p>
           Statistics
-          <span class="right badge badge-danger">New</span>
+          {{-- <span class="right badge badge-danger">New</span> --}}
         </p>
       </a>
     </li> 
     <li class="nav-item">
     <a href="{{ route('legal_list') }}" class="nav-link">
-      <i class="nav-icon fas fa-list"></i>
+      <i class="fas fa-gavel nav-icon"></i>
       <p>
         Legal
-        <span class="right badge badge-danger">New</span>
+        {{-- <span class="right badge badge-danger">New</span> --}}
       </p>
     </a>
   </li> 
-    <li class="nav-item">
+  <li class="nav-item">
     <a href="{{ route('mp_list') }}" class="nav-link">
-      <i class="nav-icon fas fa-list"></i>
+      <i class="nav-icon fas fa-heartbeat"></i>
       <p>
         Malpractice
-        <span class="right badge badge-danger">New</span>
+        {{-- <span class="right badge badge-danger">New</span> --}}
       </p>
     </a>
   </li> 
-         
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

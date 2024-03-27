@@ -10,6 +10,11 @@ use App\Http\Controllers\Admin\FirController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\LegalController;
 use App\Http\Controllers\Admin\MalpracticesController;
+use App\Http\Controllers\frontend\HomeController as FrontendHomeController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\HeadlineController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,16 +28,16 @@ use App\Http\Controllers\Admin\MalpracticesController;
 use Illuminate\Support\Facades\Hash;
 
 
-Route::get('/', function () {
-    return redirect('login');  
-   
-
-    // return Hash::make("12345678");
-});
-
+Route::get('/', [FrontendHomeController::class, 'index'])->name('index');
+Route::get('/press_release', [FrontendHomeController::class, 'press_release'])->name('pressRelease');
+Route::get('/fir', [FrontendHomeController::class, 'fir'])->name('fir');
+Route::get('/legal', [FrontendHomeController::class, 'legal'])->name('legal');
+Route::get('/statistics', [FrontendHomeController::class, 'statistics'])->name('statistics');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+ // AJAX
+ Route::get('/fetch_units', [UnitController::class, 'fetchUnits'])->name('fetch.units');
 
 
 Route::group(['as'=>'admin.','prefix' => 'admin','namespace'=>'Admin','middleware'=>['auth','admin']], function () {
@@ -58,8 +63,7 @@ Route::group(['middleware'=>['auth']], function () {
     Route::post('update_unit', [AdminController::class, 'update_unit'])->name('update_unit');
     Route::delete('destroy_unit/{id}', [AdminController::class, 'destroy_unit'])->name('unit.destroy');
 
-    // AJAX
-    Route::get('/fetch_units', [UnitController::class, 'fetchUnits'])->name('fetch.units');
+   
 
     // Press release
     Route::get('pr_list', [PressReleaseController::class, 'pr_list'])->name('pr_list');
@@ -100,6 +104,10 @@ Route::group(['middleware'=>['auth']], function () {
     Route::get('edit_mp/{id}', [MalpracticesController::class, 'edit_mp'])->name('edit_mp');
     Route::post('update_mp', [MalpracticesController::class, 'update_mp'])->name('update_mp');
     Route::delete('destroy_mp/{id}', [MalpracticesController::class, 'destroy_mp'])->name('mp.destroy');
+    
+    Route::resource('sliders', SliderController::class);
+    Route::resource('headlines', HeadlineController::class);
+
 
 });
 Route::group(['as'=>'sate.','prefix' => 'sate','namespace'=>'Sate','middleware'=>['auth','sate']], function () {

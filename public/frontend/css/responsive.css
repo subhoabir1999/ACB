@@ -1,0 +1,450 @@
+/* css-color-font-variable */
+:root {
+    --primary-color: #004890;
+    --secondary-color: #FF981F;
+    --gray-color: #C7C7C7;
+    --black-color: #202020;
+    --white-color: #FFFFFF;
+    --primary-font: 'Poppins', sans-serif;
+}
+
+@media only screen and (max-width:1280px) {
+    
+
+    /* CTA Cards */
+    .cta-latest-section .cta-lists .card {
+        padding: 18px;
+        width: auto !important;
+    }
+
+    .cta-latest-section .cta-lists .card .card-body .card-title {
+        font-size: 16px !important;
+    }
+
+    /* Head Office & Branches */
+    .head-office-section .row .col-md-3 .card {
+        width: auto !important;
+    }
+
+    .head-office-section .card .card-body {
+        margin: 42px 28px;
+    }
+
+    .tollfree,
+    .whatsapp,
+    .top-bar-links {
+        font-size: 14px;
+    }
+
+    .navbar .navbar-brand {
+        width: 25%;
+    }
+
+    .office-contact-card-section{
+        flex-wrap: wrap !important;
+    }
+}
+
+@media only screen and (max-width:1024px) {
+
+    .top-navbar .navbar .navbar-nav .nav-item .nav-link {
+        font-size: 12px;
+    }
+
+    /* Dm's Message */
+    .dm-message .message {
+        max-width: 75% !important;
+    }
+
+    /* Stats Card */
+
+    .stats-section .card {
+        width: 180px !important;
+    }
+
+    .stats-section .card .card-body h1 {
+        font-size: 36px;
+    }
+
+    .head-office-section .card .card-body h2 {
+        font-size: 20px;
+    }
+
+    .head-office-section .card .card-body {
+        margin: 28px 16px;
+    }
+}
+
+@media only screen and (max-width:991px) {
+
+    .top-navbar {
+        height: auto;
+
+    }
+
+    .top-bar-mob{
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--primary-color);
+        height: 48px;
+        padding: 8px 16px !important;
+    }
+
+    .top-bar-mob .input-group .top-search-bar{
+        height: 42px;
+        width: auto;
+        border: none !important;
+        border-radius: 24px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        margin-right: 24px;
+    }
+
+    .top-bar-mob .navbar-toggler{
+        font-size: 12px !important;
+        height: 30px;
+        color: var(--white-color);
+        font-weight: normal;
+        background-color: var(--secondary-color);
+        border-radius: 24px;
+        padding: 4px;
+        width: 78px !important;
+    }
+
+    .top-navbar .top-bar, .top-navbar .navbar  .nav-right{
+        display: none;
+    }
+
+    .navbar>.container-fluid {
+        display: block;
+    }
+
+    .top-navbar .navbar {
+        height: auto;
+    }
+
+    .navbar .navbar-brand {
+        width: 100%;
+    }
+
+    .nav-right {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        margin: 8px auto;
+    }
+
+    .float-cta-btn {
+        margin: 8px 0px 8px 8px;
+    }
+
+    .call-btn {
+        top: 195px;
+    }
+
+    .mail-btn {
+        top: 280px;
+    }
+
+    .online-complaint{
+        top: 366px;
+    }
+
+    /* .default-btn {
+        font-size: 14px;
+        padding: 8px 16px !important;
+    } */
+
+    .top-navbar .navbar .navbar-nav .nav-item .nav-link {
+        font-size: 14px;
+    }
+
+    .cta-lists,
+    .latest-update-list {
+        width: 100%;
+        padding: 0 !important;
+        margin-top: 24px;
+    }
+
+    .dm-message {
+        padding: 32px;
+    }
+
+    .dm-message .message {
+        max-width: 85%;
+    }
+
+    .dm-message .message-quote {
+        left: 70px;
+        top: 24px;
+    }
+
+    .stats-section .card {
+        width: 216px !important;
+        margin: 12px;
+    }
+
+    .stats-section .col-md-12 {
+        flex-flow: wrap;
+    }
+
+    .head-office-section .card .card-body {
+        margin: 24px 12px;
+    }
+
+    .head-office-section .card .card-body h2 {
+        font-size: 14px;
+    }
+
+    .head-office-section .card .card-body ul {
+        padding-left: 14px;
+    }
+
+    .head-office-section .card .card-body ul li {
+        font-size: 12px;
+
+    }
+
+    footer .footer-link-section .link-title,
+    footer .footer-link-section .footer-link {
+        font-size: 11px;
+    }
+
+    footer .footer-address p,
+    footer .footer-copyright p {
+        font-size: 12px;
+    }
+
+    .tollfree,
+    .whatsapp,
+    .top-bar-links {
+        font-size: 10px;
+    }
+
+    .owl-carousel .owl-item {
+        display: flex;
+        justify-content: center;
+    }
+
+    .owl-carousel .owl-item img {
+        width: 100% !important;
+    }
+
+    .owl-carousel .owl-nav {
+        bottom: 68px !important;
+    }
+
+    .complaint-form{
+        width: 100%;
+    }
+    .contact-sidebar{
+        width: 100%;
+    }
+    .contact-sidebar .contact-info-sidebar{
+        height: auto;
+    }
+}
+
+@media only screen and (max-width:480px) {
+
+    
+
+    .table tbody tr td {
+        padding: 6px 9px;
+        font-size: 14px;
+    }
+
+    .table thead tr th {
+        padding: 12px 9px;
+        font-size: 14px;
+    }
+    .show-row p{
+        font-size: 14px;
+    }
+
+    .float-cta-btn {
+        width:54px;
+        height: 54px;
+    }
+    
+    .float-cta-btn:hover{
+        width: 300px;
+    }
+
+    .mob-mb-4{
+        margin-bottom: 1rem;
+    }
+
+    .contact-info-sidebar .sidebar-body-info .sidebar-text h2, .contact-info-sidebar .sidebar-title h2{
+        font-size: 14px;
+    }
+
+    .float-cta-btn {
+        margin: 4px 0px 4px 4px;
+    }
+
+    .float-cta-btn img {
+        max-width: 38px;
+    }
+
+    .float-cta-btn .content {
+        font-size: 14px;
+    }
+
+    .float-btn .whatsapp-btn {
+        position: fixed;
+        right: -4px;
+        top: 110px;
+    }
+
+    .call-btn {
+        right: -4px;
+        top:182px;
+    }
+
+    .mail-btn {
+        right: -4px;
+        top: 252px;
+    }
+
+    .online-complaint{
+        right: -4px;
+        top: 324px ;
+    }
+
+    .headline {
+        width: 100%;
+        height: 35px;
+        background-color: var(--primary-color);
+    }
+
+
+    .cta-latest-section {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .dm-message {
+        margin: auto 12px;
+    }
+
+    .stats {
+        padding: 0px 16px;
+    }
+
+    .stats-section .card {
+        width: 152px !important;
+    }
+
+    .stats-section .card:last-child{
+        width: 100% !important;
+    }
+
+    /* .stats-section .last-card{
+        width: 100% !important;
+    } */
+
+    .stats-section .card .card-body img{
+        display: none;
+    }
+
+    .stats-section .card .card-body .card-text {
+        font-size: 18px;
+    }
+
+    .head-office-section {
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .headline .headline-title {
+        padding: 0px 6px;
+    }
+
+    .headline .headline-title h3 {
+        font-size: 14px;
+    }
+
+    .headline .headline-marquee p {
+        font-size: 14px;
+    }
+
+    .dm-message .message {
+        max-width: 90% !important;
+    }
+
+    .head-office-section .card .card-body ul li {
+        font-size: 14px;
+    }
+
+    .head-office-section .card {
+        width: 212px !important;
+    }
+
+    .stats-section .col-md-12 {
+        flex-flow: wrap;
+        padding: 0;
+    }
+
+    .stats h1,
+    .head-office-section h1 {
+        font-size: 24px;
+    }
+
+    .offcanvas {
+        width: 80%;
+    }
+
+    footer .footer-link-section .link-title {
+        font-size: 14px;
+    }
+
+    footer .footer-address p,
+    footer .footer-copyright p,
+    footer .footer-link-section .footer-link {
+        font-size: 14px;
+    }
+
+    .nav-embalem {
+        margin: 0;
+    }
+
+    .owl-carousel .owl-nav {
+        bottom: 68px !important;
+    }
+
+    .add-more-btn {
+        margin-top: 16px;
+    }
+
+    .secondary-btn-border{
+        margin-top: 16px;
+    }
+
+
+    .disclaimer-content, .gallery-section, .event-section, .faq-section{
+        padding: 16px !important;
+    }
+    /* File Upload Btn */
+/* 
+    .fileUploadContainer .file-upload{
+        display: flex !important;
+        align-items: center;
+    }
+
+    .fileUploadContainer .file-upload .file-upload-btn{
+        display: block;
+    }
+
+    .fileUploadContainer .file-upload span{
+        font-size: 12px; white-space: nowrap; width:220px; overflow: hidden; text-overflow: ellipsis;
+    } */
+}
+
+@media only screen and (min-width:640px) and (max-width:768px) {
+
+    .mob-mb-4{
+        padding-bottom: 1rem;
+    }
+}
